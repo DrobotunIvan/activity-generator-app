@@ -401,12 +401,16 @@ const renderHistory = () => {
   document.getElementById('stat-favs').textContent = favs.length;
   
   const list = document.getElementById('history-list');
+  const btnClear = document.getElementById('btn-clear-history');
   list.innerHTML = '';
   
   if (hist.length === 0) {
+    if (btnClear) btnClear.disabled = true;
     list.innerHTML = '<p>Історія поки порожня.</p>';
     return;
   }
+  
+  if (btnClear) btnClear.disabled = false;
   
   hist.slice(0, 10).forEach(entry => {
     const a = acts.find(act => act.id === entry.activityId);
