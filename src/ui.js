@@ -1,5 +1,5 @@
 import { generateActivity } from './generator.js';
-import { getActivities, setActivities, getFavorites, setFavorites, getHistory, addToHistory, getPreferences, setPreferences, resetDemoData, exportAllData, importAllData } from './storage.js';
+import { getActivities, setActivities, getFavorites, setFavorites, getHistory, setHistory, addToHistory, getPreferences, setPreferences, resetDemoData, exportAllData, importAllData } from './storage.js';
 
 let currentActivityId = null;
 
