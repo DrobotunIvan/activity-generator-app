@@ -85,6 +85,16 @@ button.primary:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
+.btn-subtext {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 300;
+  font-style: normal;
+  opacity: 0.85;
+  margin-top: 4px;
+  font-family: 'Outfit', sans-serif;
+}
+
 button.secondary { background-color: var(--secondary); color: white; border: none; }
 button.secondary:hover { background-color: var(--secondary-hover); }
 
