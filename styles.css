@@ -39,6 +39,14 @@ header {
 
 h1, h2, h3, h4 { margin: 0 0 1rem 0; font-weight: 600; letter-spacing: -0.02em; }
 
+.app-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
 nav { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
 
 button {
