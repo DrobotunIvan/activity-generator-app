@@ -66,8 +66,24 @@ nav button.active {
   border-color: var(--primary);
 }
 
-button.primary { background-color: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem; }
-button.primary:hover { background-color: var(--primary-hover); }
+button.primary { 
+  background-color: var(--primary); 
+  color: white; 
+  border: none; 
+  padding: 0.75rem 2rem; 
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+button.primary:hover { 
+  background-color: var(--primary-hover); 
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
 
 button.secondary { background-color: var(--secondary); color: white; border: none; }
 button.secondary:hover { background-color: var(--secondary-hover); }
