@@ -1,19 +1,165 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KPI 2026 GitHub Pages Template</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <main class="container">
-      <h1>KPI 2026 GitHub Pages Template</h1>
-      <p>This repository is a starter template for small coursework web applications.</p>
-      <p>Add markdown requirements under <code>requirements/</code>, then run the skill to turn this into a real app.</p>
-      <button id="reset-demo" type="button">Reset demo message</button>
-      <p id="status" class="status"></p>
-    </main>
-    <script type="module" src="./src/app.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activity Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Activity Generator</h1>
+    <nav>
+      <button id="nav-generator" class="active">Generator</button>
+      <button id="nav-favorites">Favorites</button>
+      <button id="nav-custom">Custom</button>
+      <button id="nav-history">History</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Generator View -->
+    <section id="view-generator" class="view active">
+      <div class="preferences">
+        <h2>Preferences</h2>
+        <div class="filter-group">
+          <label>Categories (Select at least one):</label>
+          <div class="checkbox-group" id="category-filters">
+            <label><input type="checkbox" value="Sport"> Sport</label>
+            <label><input type="checkbox" value="Education"> Education</label>
+            <label><input type="checkbox" value="Creativity"> Creativity</label>
+            <label><input type="checkbox" value="Entertainment"> Entertainment</label>
+            <label><input type="checkbox" value="Outdoor"> Outdoor</label>
+            <label><input type="checkbox" value="Relaxation"> Relaxation</label>
+          </div>
+        </div>
+        <div class="filter-group">
+          <label for="filter-duration">Max Duration (mins):</label>
+          <input type="number" id="filter-duration" placeholder="e.g. 60" min="1">
+        </div>
+        <div class="filter-group">
+          <label for="filter-location">Location Type:</label>
+          <select id="filter-location">
+            <option value="">Any</option>
+            <option value="Indoor">Indoor</option>
+            <option value="Outdoor">Outdoor</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-cost">Cost Type:</label>
+          <select id="filter-cost">
+            <option value="">Any</option>
+            <option value="Free">Free Only</option>
+            <option value="Paid">Paid</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-difficulty">Difficulty:</label>
+          <select id="filter-difficulty">
+            <option value="">Any</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="generator-actions">
+        <button id="btn-generate" class="primary">Generate Activity</button>
+        <p id="generate-error" class="error hidden">Please select at least one category.</p>
+      </div>
+
+      <div id="activity-result" class="result-card hidden">
+        <h3 id="res-title"></h3>
+        <p id="res-desc"></p>
+        <div class="tags">
+          <span class="tag" id="res-cat"></span>
+          <span class="tag" id="res-dur"></span>
+          <span class="tag" id="res-loc"></span>
+          <span class="tag" id="res-cost"></span>
+          <span class="tag" id="res-diff"></span>
+        </div>
+        <button id="btn-favorite" class="secondary">Add to Favorites</button>
+      </div>
+    </section>
+
+    <!-- Favorites View -->
+    <section id="view-favorites" class="view hidden">
+      <h2>Favorite Activities</h2>
+      <div id="favorites-list" class="card-list"></div>
+    </section>
+
+    <!-- Custom View -->
+    <section id="view-custom" class="view hidden">
+      <h2>Custom Activities</h2>
+      <form id="form-custom" class="preferences">
+        <div class="filter-group">
+          <label for="cust-title">Title:</label>
+          <input type="text" id="cust-title" required>
+        </div>
+        <div class="filter-group">
+          <label for="cust-desc">Description:</label>
+          <textarea id="cust-desc" required></textarea>
+        </div>
+        <div class="filter-group">
+          <label for="cust-cat">Category:</label>
+          <select id="cust-cat" required>
+            <option value="Sport">Sport</option>
+            <option value="Education">Education</option>
+            <option value="Creativity">Creativity</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Outdoor">Outdoor</option>
+            <option value="Relaxation">Relaxation</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="cust-dur">Duration (mins):</label>
+          <input type="number" id="cust-dur" required min="1">
+        </div>
+        <div class="filter-group">
+          <label for="cust-loc">Location:</label>
+          <select id="cust-loc" required>
+            <option value="Indoor">Indoor</option>
+            <option value="Outdoor">Outdoor</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="cust-cost">Cost:</label>
+          <select id="cust-cost" required>
+            <option value="Free">Free</option>
+            <option value="Paid">Paid</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="cust-diff">Difficulty:</label>
+          <select id="cust-diff" required>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
+        </div>
+        <button type="submit" class="primary">Add Custom Activity</button>
+      </form>
+      <div id="custom-list" class="card-list"></div>
+    </section>
+
+    <!-- History View -->
+    <section id="view-history" class="view hidden">
+      <h2>History & Statistics</h2>
+      <div class="stats-card">
+        <p>Total Generated: <strong id="stat-total">0</strong></p>
+        <p>Total Favorites: <strong id="stat-favs">0</strong></p>
+      </div>
+      <h3>Recent Generations</h3>
+      <div id="history-list" class="card-list"></div>
+      
+      <div class="danger-zone">
+        <h3>Reset Data</h3>
+        <button id="btn-reset" class="danger">Reset Demo Data</button>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="src/app.js"></script>
+</body>
 </html>

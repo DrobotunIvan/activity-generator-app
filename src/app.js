@@ -1,19 +1,10 @@
-const statusNode = document.getElementById('status');
-const resetButton = document.getElementById('reset-demo');
+import { initUI } from './ui.js';
+import { getActivities } from './storage.js';
 
-function setMessage() {
-  const current = new Date().toLocaleString();
-  localStorage.setItem('kpi26-template-message', `Demo state reset at ${current}`);
-  renderMessage();
-}
-
-function renderMessage() {
-  const saved = localStorage.getItem('kpi26-template-message');
-  statusNode.textContent = saved || 'No demo message stored yet.';
-}
-
-resetButton?.addEventListener('click', () => {
-  setMessage();
+document.addEventListener('DOMContentLoaded', () => {
+  // Ensure initial data is populated
+  getActivities();
+  
+  // Initialize UI event listeners and rendering
+  initUI();
 });
-
-renderMessage();
