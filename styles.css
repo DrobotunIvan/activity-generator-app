@@ -87,6 +87,16 @@ main {
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   backdrop-filter: blur(8px);
+  transition: border-color 0.3s;
+}
+
+/* Spotlight effect */
+.preferences:hover, .result-card:hover, .stats-card:hover, .danger-zone:hover, .card:hover {
+  background: radial-gradient(
+    circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(30, 30, 35, 0.95) 0%,
+    rgba(30, 30, 35, 0.75) 100%
+  );
 }
 
 .filter-group { margin-bottom: 1rem; }
