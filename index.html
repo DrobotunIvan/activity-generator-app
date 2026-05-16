@@ -97,12 +97,12 @@
       <h2>Власні активності</h2>
       <form id="form-custom" class="preferences">
         <div class="filter-group">
-          <label for="cust-title">Назва:</label>
-          <input type="text" id="cust-title" required>
+          <label for="cust-title">Назва: <span id="title-counter" class="char-counter">0/60</span></label>
+          <input type="text" id="cust-title" required maxlength="60">
         </div>
         <div class="filter-group">
-          <label for="cust-desc">Опис:</label>
-          <textarea id="cust-desc" required></textarea>
+          <label for="cust-desc">Опис: <span id="desc-counter" class="char-counter">0/250</span></label>
+          <textarea id="cust-desc" required maxlength="250"></textarea>
         </div>
         <div class="filter-group">
           <label for="cust-cat">Категорія:</label>

@@ -158,12 +158,26 @@ const updateFavButtonState = () => {
 };
 
 const setupCustomForm = () => {
-  document.getElementById('form-custom').addEventListener('submit', (e) => {
+  const form = document.getElementById('form-custom');
+  const titleInput = document.getElementById('cust-title');
+  const descInput = document.getElementById('cust-desc');
+  const titleCounter = document.getElementById('title-counter');
+  const descCounter = document.getElementById('desc-counter');
+
+  const updateCounters = () => {
+    titleCounter.textContent = `${titleInput.value.length}/60`;
+    descCounter.textContent = `${descInput.value.length}/250`;
+  };
+
+  titleInput.addEventListener('input', updateCounters);
+  descInput.addEventListener('input', updateCounters);
+
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     const newActivity = {
       id: `custom-${Date.now()}`,
-      title: document.getElementById('cust-title').value,
-      description: document.getElementById('cust-desc').value,
+      title: titleInput.value,
+      description: descInput.value,
       category: document.getElementById('cust-cat').value,
       duration: parseInt(document.getElementById('cust-dur').value, 10),
       locationType: document.getElementById('cust-loc').value,
@@ -175,6 +189,7 @@ const setupCustomForm = () => {
     const activities = getActivities();
     setActivities([...activities, newActivity]);
     e.target.reset();
+    updateCounters();
     renderCustom();
     alert('Власну активність успішно додано!');
   });
