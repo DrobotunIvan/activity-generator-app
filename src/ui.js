@@ -348,7 +348,9 @@ const renderCustom = () => {
     list.innerHTML = '<p>Ще немає створених власних активностей.</p>';
     return;
   }
-  
+  customActs.forEach(a => {
+    const card = document.createElement('div');
+    card.className = 'card';
     const isFav = getFavorites().includes(a.id);
     card.innerHTML = `
       <div class="card-content">
