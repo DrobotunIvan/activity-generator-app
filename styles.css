@@ -5,11 +5,11 @@
   --secondary-hover: #059669;
   --danger: #EF4444;
   --danger-hover: #DC2626;
-  --bg-color: #F9FAFB;
-  --card-bg: rgba(255, 255, 255, 0.92);
-  --text-main: #111827;
-  --text-muted: #6B7280;
-  --border-color: #E5E7EB;
+  --bg-color: transparent;
+  --card-bg: rgba(30, 30, 35, 0.75);
+  --text-main: #F9FAFB;
+  --text-muted: #9CA3AF;
+  --border-color: rgba(255, 255, 255, 0.15);
 }
 
 * { box-sizing: border-box; }
@@ -45,7 +45,8 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   border: 1px solid var(--border-color);
-  background-color: var(--card-bg);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
   font-weight: 500;
   transition: all 0.2s;
 }
@@ -92,7 +93,10 @@ main {
 .filter-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
 .filter-group input[type="number"], .filter-group input[type="text"], .filter-group select, .filter-group textarea {
   width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 0.375rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: var(--text-main);
 }
+.filter-group select option { background-color: #2D2D2D; color: #FFF; }
 .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.5rem; }
 .checkbox-group label { font-weight: normal; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: color 0.2s; }
 .checkbox-group label:hover { color: var(--primary); }
@@ -116,7 +120,7 @@ label:hover .cat-icon, .tag:hover .cat-icon, .animated {
 .error { color: var(--danger); font-size: 0.875rem; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
-.tag { background: var(--bg-color); border: 1px solid var(--border-color); padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem; color: var(--text-muted); }
+.tag { background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border-color); padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.875rem; color: var(--text-muted); }
 
 .card-list { display: flex; flex-direction: column; gap: 1rem; }
 .card { display: flex; justify-content: space-between; align-items: flex-start; }
