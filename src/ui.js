@@ -417,6 +417,7 @@ const renderHistory = () => {
     const a = acts.find(act => act.id === entry.activityId);
     if (!a) return;
     
+    const isFav = favs.includes(a.id);
     const d = new Date(entry.generatedAt);
     const card = document.createElement('div');
     card.className = 'card';
@@ -425,7 +426,26 @@ const renderHistory = () => {
         <h4>${a.title}</h4>
         <p>Згенеровано: ${d.toLocaleString()}</p>
       </div>
+      <div class="card-actions">
+        <button class="${isFav ? 'danger' : 'secondary'} btn-fav-history" data-id="${a.id}">
+          ${isFav ? 'Прибрати' : 'В улюблені'}
+        </button>
+      </div>
     `;
     list.appendChild(card);
+  });
+  
+  document.querySelectorAll('.btn-fav-history').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = e.target.getAttribute('data-id');
+      const currentFavs = getFavorites();
+      if (currentFavs.includes(id)) {
+        setFavorites(currentFavs.filter(fid => fid !== id));
+      } else {
+        setFavorites([...currentFavs, id]);
+      }
+      renderHistory();
+      if (currentActivityId === id) updateFavButtonState();
+    });
   });
 };
