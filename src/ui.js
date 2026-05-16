@@ -1,5 +1,5 @@
 import { generateActivity } from './generator.js';
-import { getActivities, setActivities, getFavorites, setFavorites, getHistory, addToHistory, getPreferences, setPreferences, resetDemoData } from './storage.js';
+import { getActivities, setActivities, getFavorites, setFavorites, getHistory, addToHistory, getPreferences, setPreferences, resetDemoData, exportAllData, importAllData } from './storage.js';
 
 let currentActivityId = null;
 
@@ -18,6 +18,7 @@ export const initUI = () => {
   setupGenerator();
   setupCustomForm();
   setupReset();
+  setupDataManagement();
   
   // Initial renders
   renderFavorites();
@@ -185,6 +186,47 @@ const setupReset = () => {
       resetDemoData();
       location.reload();
     }
+  });
+};
+
+const setupDataManagement = () => {
+  const btnExport = document.getElementById('btn-export');
+  const btnImportTrigger = document.getElementById('btn-import-trigger');
+  const fileImport = document.getElementById('file-import');
+
+  btnExport.addEventListener('click', () => {
+    const data = exportAllData();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `activity_generator_backup_${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  btnImportTrigger.addEventListener('click', () => {
+    fileImport.click();
+  });
+
+  fileImport.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const data = JSON.parse(event.target.result);
+        if (confirm('Це замінить усі ваші поточні дані завантаженими з файлу. Ви впевнені?')) {
+          importAllData(data);
+          alert('Дані успішно імпортовано!');
+          location.reload();
+        }
+      } catch (err) {
+        alert('Помилка при читанні файлу. Переконайтеся, що це коректний JSON файл.');
+      }
+    };
+    reader.readAsText(file);
   });
 };
 

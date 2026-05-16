@@ -152,6 +152,8 @@ label:hover .cat-icon, .tag:hover .cat-icon, .animated {
 }
 
 .generator-actions { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 2rem; }
+.data-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.data-actions button { flex: 1; min-width: 200px; }
 .error { color: var(--danger); font-size: 0.875rem; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }

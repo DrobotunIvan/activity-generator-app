@@ -91,3 +91,18 @@ export const resetDemoData = () => {
     preferredDifficulty: ''
   });
 };
+
+export const exportAllData = () => {
+  const data = {};
+  Object.values(STORAGE_KEYS).forEach(key => {
+    const val = localStorage.getItem(key);
+    if (val) data[key] = JSON.parse(val);
+  });
+  return data;
+};
+
+export const importAllData = (data) => {
+  Object.entries(data).forEach(([key, val]) => {
+    localStorage.setItem(key, JSON.stringify(val));
+  });
+};

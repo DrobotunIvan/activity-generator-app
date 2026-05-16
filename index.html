@@ -157,8 +157,14 @@
       <div id="history-list" class="card-list"></div>
       
       <div class="danger-zone">
-        <h3>Скинути дані</h3>
-        <button id="btn-reset" class="danger">Скинути демо-дані</button>
+        <h3>Керування даними</h3>
+        <div class="data-actions">
+          <button id="btn-export" class="secondary">Експортувати дані (JSON)</button>
+          <button id="btn-import-trigger" class="secondary">Імпортувати дані (JSON)</button>
+          <input type="file" id="file-import" accept=".json" class="hidden">
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin: 1rem 0;">Скидання видалить історію, улюблені та власні активності.</p>
+        <button id="btn-reset" class="danger">Скинути всі дані</button>
       </div>
     </section>
   </main>
