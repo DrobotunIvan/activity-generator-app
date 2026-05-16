@@ -10,7 +10,16 @@ const STORAGE_KEYS = {
 export const getActivities = () => {
   const stored = localStorage.getItem(STORAGE_KEYS.ACTIVITIES);
   if (stored) {
-    return JSON.parse(stored);
+    let activities = JSON.parse(stored);
+    let changed = false;
+    DEMO_ACTIVITIES.forEach(demoAct => {
+      if (!activities.find(a => a.id === demoAct.id)) {
+        activities.push(demoAct);
+        changed = true;
+      }
+    });
+    if (changed) setActivities(activities);
+    return activities;
   }
   setActivities(DEMO_ACTIVITIES);
   return DEMO_ACTIVITIES;

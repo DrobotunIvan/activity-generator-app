@@ -7,7 +7,7 @@ export const generateActivity = (preferences) => {
   // Get the IDs of the last 5 generated activities
   const recentHistoryIds = history.slice(0, 5).map(h => h.activityId);
   
-  const filteredActivities = activities.filter(activity => {
+  let filteredActivities = activities.filter(activity => {
     // BR-3 Category Rule: At least one category must be selected
     if (preferences.selectedCategories.length > 0 && !preferences.selectedCategories.includes(activity.category)) {
       return false;
@@ -36,13 +36,15 @@ export const generateActivity = (preferences) => {
       return false;
     }
     
-    // BR-4 Anti-Repetition Rule
-    if (recentHistoryIds.includes(activity.id)) {
-      return false;
-    }
-    
     return true;
   });
+  
+  // BR-4 Anti-Repetition Rule
+  // Filter out recent activities, but if that leaves us with nothing, ignore the rule
+  const nonRepeated = filteredActivities.filter(a => !recentHistoryIds.includes(a.id));
+  if (nonRepeated.length > 0) {
+    filteredActivities = nonRepeated;
+  }
   
   if (filteredActivities.length === 0) {
     return null;
