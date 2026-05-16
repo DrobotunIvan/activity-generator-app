@@ -3,6 +3,15 @@ import { getActivities, setActivities, getFavorites, setFavorites, getHistory, a
 
 let currentActivityId = null;
 
+const categoryIcons = {
+  'Sport': '🏃',
+  'Education': '📚',
+  'Creativity': '🎨',
+  'Entertainment': '🎮',
+  'Outdoor': '🏕️',
+  'Relaxation': '🧘'
+};
+
 export const initUI = () => {
   setupNavigation();
   setupPreferences();
@@ -98,7 +107,8 @@ const setupGenerator = () => {
     // Display result
     document.getElementById('res-title').textContent = activity.title;
     document.getElementById('res-desc').textContent = activity.description;
-    document.getElementById('res-cat').textContent = activity.category;
+    const icon = categoryIcons[activity.category] || '✨';
+    document.getElementById('res-cat').innerHTML = `<span class="cat-icon animated">${icon}</span> ${activity.category}`;
     document.getElementById('res-dur').textContent = `${activity.duration} mins`;
     document.getElementById('res-loc').textContent = activity.locationType;
     document.getElementById('res-cost').textContent = activity.costType;
@@ -186,7 +196,7 @@ const renderFavorites = () => {
         <h4>${a.title}</h4>
         <p>${a.description}</p>
         <div class="tags">
-          <span class="tag">${a.category}</span>
+          <span class="tag"><span class="cat-icon">${categoryIcons[a.category] || '✨'}</span> ${a.category}</span>
           <span class="tag">${a.duration}m</span>
           <span class="tag">${a.costType}</span>
         </div>

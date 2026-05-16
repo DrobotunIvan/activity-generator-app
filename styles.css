@@ -88,8 +88,24 @@ main {
 .filter-group input[type="number"], .filter-group input[type="text"], .filter-group select, .filter-group textarea {
   width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 0.375rem;
 }
-.checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 0.5rem; }
-.checkbox-group label { font-weight: normal; display: flex; align-items: center; gap: 0.5rem; }
+.checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.5rem; }
+.checkbox-group label { font-weight: normal; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: color 0.2s; }
+.checkbox-group label:hover { color: var(--primary); }
+
+.cat-icon {
+  display: inline-block;
+  margin-right: 0.25rem;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+label:hover .cat-icon, .tag:hover .cat-icon, .animated {
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-10deg) scale(1.1); }
+  50% { transform: rotate(10deg) scale(1.1); }
+}
 
 .generator-actions { display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-bottom: 2rem; }
 .error { color: var(--danger); font-size: 0.875rem; }
