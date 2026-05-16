@@ -127,6 +127,22 @@ label:hover .cat-icon, .tag:hover .cat-icon, .animated {
 .card-content h4 { margin: 0 0 0.5rem 0; }
 .card-content p { margin: 0 0 0.5rem 0; color: var(--text-muted); font-size: 0.875rem; }
 
+/* Drag and Drop Styles */
+.card[draggable="true"] {
+  cursor: grab;
+}
+.card[draggable="true"]:active {
+  cursor: grabbing;
+}
+.card.dragging {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+.card.drag-over {
+  border: 2px dashed var(--primary);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
 @media (min-width: 640px) {
   header { flex-direction: row; justify-content: space-between; }
 }
