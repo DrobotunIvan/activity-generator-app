@@ -6,9 +6,9 @@
   --danger: #f87171;
   --danger-hover: #ef4444;
   --bg-color: #0f172a;
-  --card-bg: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.04);
   --text-main: #f8fafc;
-  --text-muted: #94a3b8;
+  --text-muted: #cbd5e1;
   --border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -17,7 +17,7 @@
 body {
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.6;
-  background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('assets/bg.jpg');
+  background: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)), url('assets/bg.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -127,8 +127,8 @@ main {
 
 .preferences, .result-card, .stats-card, .danger-zone, .card {
   background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 1.5rem;
   border-radius: 1.25rem;
   border: 1px solid var(--border-color);
