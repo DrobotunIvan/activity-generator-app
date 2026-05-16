@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activity Generator</title>
+  <title>Генератор Активностей</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>Activity Generator</h1>
+    <h1>Генератор Активностей</h1>
     <nav>
-      <button id="nav-generator" class="active">Generator</button>
-      <button id="nav-favorites">Favorites</button>
-      <button id="nav-custom">Custom</button>
-      <button id="nav-history">History</button>
+      <button id="nav-generator" class="active">Генератор</button>
+      <button id="nav-favorites">Улюблені</button>
+      <button id="nav-custom">Власні</button>
+      <button id="nav-history">Історія</button>
     </nav>
   </header>
 
@@ -21,52 +21,52 @@
     <!-- Generator View -->
     <section id="view-generator" class="view active">
       <div class="preferences">
-        <h2>Preferences</h2>
+        <h2>Налаштування</h2>
         <div class="filter-group">
-          <label>Categories (Select at least one):</label>
+          <label>Категорії (Оберіть хоча б одну):</label>
           <div class="checkbox-group" id="category-filters">
-            <label><input type="checkbox" value="Sport"> <span class="cat-icon">🏃</span> Sport</label>
-            <label><input type="checkbox" value="Education"> <span class="cat-icon">📚</span> Education</label>
-            <label><input type="checkbox" value="Creativity"> <span class="cat-icon">🎨</span> Creativity</label>
-            <label><input type="checkbox" value="Entertainment"> <span class="cat-icon">🎮</span> Entertainment</label>
-            <label><input type="checkbox" value="Outdoor"> <span class="cat-icon">🏕️</span> Outdoor</label>
-            <label><input type="checkbox" value="Relaxation"> <span class="cat-icon">🧘</span> Relaxation</label>
+            <label><input type="checkbox" value="Спорт"> <span class="cat-icon">🏃</span> Спорт</label>
+            <label><input type="checkbox" value="Навчання"> <span class="cat-icon">📚</span> Навчання</label>
+            <label><input type="checkbox" value="Креативність"> <span class="cat-icon">🎨</span> Креативність</label>
+            <label><input type="checkbox" value="Розваги"> <span class="cat-icon">🎮</span> Розваги</label>
+            <label><input type="checkbox" value="На вулиці"> <span class="cat-icon">🏕️</span> На вулиці</label>
+            <label><input type="checkbox" value="Відпочинок"> <span class="cat-icon">🧘</span> Відпочинок</label>
           </div>
         </div>
         <div class="filter-group">
-          <label for="filter-duration">Max Duration (mins):</label>
-          <input type="number" id="filter-duration" placeholder="e.g. 60" min="1">
+          <label for="filter-duration">Макс. тривалість (хв):</label>
+          <input type="number" id="filter-duration" placeholder="напр. 60" min="1">
         </div>
         <div class="filter-group">
-          <label for="filter-location">Location Type:</label>
+          <label for="filter-location">Локація:</label>
           <select id="filter-location">
-            <option value="">Any</option>
-            <option value="Indoor">Indoor</option>
-            <option value="Outdoor">Outdoor</option>
+            <option value="">Будь-яка</option>
+            <option value="В приміщенні">В приміщенні</option>
+            <option value="На вулиці">На вулиці</option>
           </select>
         </div>
         <div class="filter-group">
-          <label for="filter-cost">Cost Type:</label>
+          <label for="filter-cost">Вартість:</label>
           <select id="filter-cost">
-            <option value="">Any</option>
-            <option value="Free">Free Only</option>
-            <option value="Paid">Paid</option>
+            <option value="">Будь-яка</option>
+            <option value="Безкоштовно">Лише безкоштовно</option>
+            <option value="Платно">Платно</option>
           </select>
         </div>
         <div class="filter-group">
-          <label for="filter-difficulty">Difficulty:</label>
+          <label for="filter-difficulty">Складність:</label>
           <select id="filter-difficulty">
-            <option value="">Any</option>
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
+            <option value="">Будь-яка</option>
+            <option value="Легко">Легко</option>
+            <option value="Середньо">Середньо</option>
+            <option value="Складно">Складно</option>
           </select>
         </div>
       </div>
       
       <div class="generator-actions">
-        <button id="btn-generate" class="primary">Generate Activity</button>
-        <p id="generate-error" class="error hidden">Please select at least one category.</p>
+        <button id="btn-generate" class="primary">Згенерувати активність</button>
+        <p id="generate-error" class="error hidden">Будь ласка, оберіть хоча б одну категорію.</p>
       </div>
 
       <div id="activity-result" class="result-card hidden">
@@ -79,83 +79,83 @@
           <span class="tag" id="res-cost"></span>
           <span class="tag" id="res-diff"></span>
         </div>
-        <button id="btn-favorite" class="secondary">Add to Favorites</button>
+        <button id="btn-favorite" class="secondary">Додати до улюблених</button>
       </div>
     </section>
 
     <!-- Favorites View -->
     <section id="view-favorites" class="view">
-      <h2>Favorite Activities</h2>
+      <h2>Улюблені активності</h2>
       <div id="favorites-list" class="card-list"></div>
     </section>
 
     <!-- Custom View -->
     <section id="view-custom" class="view">
-      <h2>Custom Activities</h2>
+      <h2>Власні активності</h2>
       <form id="form-custom" class="preferences">
         <div class="filter-group">
-          <label for="cust-title">Title:</label>
+          <label for="cust-title">Назва:</label>
           <input type="text" id="cust-title" required>
         </div>
         <div class="filter-group">
-          <label for="cust-desc">Description:</label>
+          <label for="cust-desc">Опис:</label>
           <textarea id="cust-desc" required></textarea>
         </div>
         <div class="filter-group">
-          <label for="cust-cat">Category:</label>
+          <label for="cust-cat">Категорія:</label>
           <select id="cust-cat" required>
-            <option value="Sport">Sport</option>
-            <option value="Education">Education</option>
-            <option value="Creativity">Creativity</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Outdoor">Outdoor</option>
-            <option value="Relaxation">Relaxation</option>
+            <option value="Спорт">Спорт</option>
+            <option value="Навчання">Навчання</option>
+            <option value="Креативність">Креативність</option>
+            <option value="Розваги">Розваги</option>
+            <option value="На вулиці">На вулиці</option>
+            <option value="Відпочинок">Відпочинок</option>
           </select>
         </div>
         <div class="filter-group">
-          <label for="cust-dur">Duration (mins):</label>
+          <label for="cust-dur">Тривалість (хв):</label>
           <input type="number" id="cust-dur" required min="1">
         </div>
         <div class="filter-group">
-          <label for="cust-loc">Location:</label>
+          <label for="cust-loc">Локація:</label>
           <select id="cust-loc" required>
-            <option value="Indoor">Indoor</option>
-            <option value="Outdoor">Outdoor</option>
+            <option value="В приміщенні">В приміщенні</option>
+            <option value="На вулиці">На вулиці</option>
           </select>
         </div>
         <div class="filter-group">
-          <label for="cust-cost">Cost:</label>
+          <label for="cust-cost">Вартість:</label>
           <select id="cust-cost" required>
-            <option value="Free">Free</option>
-            <option value="Paid">Paid</option>
+            <option value="Безкоштовно">Безкоштовно</option>
+            <option value="Платно">Платно</option>
           </select>
         </div>
         <div class="filter-group">
-          <label for="cust-diff">Difficulty:</label>
+          <label for="cust-diff">Складність:</label>
           <select id="cust-diff" required>
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
+            <option value="Легко">Легко</option>
+            <option value="Середньо">Середньо</option>
+            <option value="Складно">Складно</option>
           </select>
         </div>
-        <button type="submit" class="primary">Add Custom Activity</button>
+        <button type="submit" class="primary">Додати власну активність</button>
       </form>
       <div id="custom-list" class="card-list"></div>
     </section>
 
     <!-- History View -->
     <section id="view-history" class="view">
-      <h2>History & Statistics</h2>
+      <h2>Історія та статистика</h2>
       <div class="stats-card">
-        <p>Total Generated: <strong id="stat-total">0</strong></p>
-        <p>Total Favorites: <strong id="stat-favs">0</strong></p>
+        <p>Всього згенеровано: <strong id="stat-total">0</strong></p>
+        <p>Всього улюблених: <strong id="stat-favs">0</strong></p>
       </div>
-      <h3>Recent Generations</h3>
+      <h3>Недавні генерації</h3>
       <div id="history-list" class="card-list"></div>
       
       <div class="danger-zone">
-        <h3>Reset Data</h3>
-        <button id="btn-reset" class="danger">Reset Demo Data</button>
+        <h3>Скинути дані</h3>
+        <button id="btn-reset" class="danger">Скинути демо-дані</button>
       </div>
     </section>
   </main>

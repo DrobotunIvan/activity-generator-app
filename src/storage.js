@@ -13,8 +13,12 @@ export const getActivities = () => {
     let activities = JSON.parse(stored);
     let changed = false;
     DEMO_ACTIVITIES.forEach(demoAct => {
-      if (!activities.find(a => a.id === demoAct.id)) {
+      const existingIndex = activities.findIndex(a => a.id === demoAct.id);
+      if (existingIndex === -1) {
         activities.push(demoAct);
+        changed = true;
+      } else if (activities[existingIndex].title !== demoAct.title) {
+        activities[existingIndex] = demoAct;
         changed = true;
       }
     });
