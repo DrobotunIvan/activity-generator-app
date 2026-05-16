@@ -19,10 +19,10 @@ export const generateActivity = (preferences) => {
     }
     
     // BR-1 Free Activities Rule / Cost Type
-    if (preferences.preferredCostType === 'Free' && activity.costType !== 'Free') {
+    if (preferences.preferredCostType === 'Безкоштовно' && activity.costType !== 'Безкоштовно') {
       return false;
     }
-    if (preferences.preferredCostType === 'Paid' && activity.costType !== 'Paid') {
+    if (preferences.preferredCostType === 'Платно' && activity.costType !== 'Платно') {
       return false;
     }
     

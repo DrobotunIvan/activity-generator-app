@@ -349,17 +349,38 @@ const renderCustom = () => {
     return;
   }
   
-  customActs.forEach(a => {
-    const card = document.createElement('div');
-    card.className = 'card';
+    const isFav = getFavorites().includes(a.id);
     card.innerHTML = `
       <div class="card-content">
         <h4>${a.title}</h4>
         <p>${a.description}</p>
+        <div class="tags">
+          <span class="tag"><span class="cat-icon">${categoryIcons[a.category] || '✨'}</span> ${a.category}</span>
+          <span class="tag">${a.duration} хв</span>
+        </div>
       </div>
-      <button class="danger btn-remove-custom" data-id="${a.id}">Видалити</button>
+      <div class="card-actions">
+        <button class="${isFav ? 'danger' : 'secondary'} btn-fav-custom" data-id="${a.id}">
+          ${isFav ? 'Прибрати' : 'В улюблені'}
+        </button>
+        <button class="danger btn-remove-custom" data-id="${a.id}">Видалити</button>
+      </div>
     `;
     list.appendChild(card);
+  });
+  
+  document.querySelectorAll('.btn-fav-custom').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const id = e.target.getAttribute('data-id');
+      const favs = getFavorites();
+      if (favs.includes(id)) {
+        setFavorites(favs.filter(fid => fid !== id));
+      } else {
+        setFavorites([...favs, id]);
+      }
+      renderCustom();
+      if (currentActivityId === id) updateFavButtonState();
+    });
   });
   
   document.querySelectorAll('.btn-remove-custom').forEach(btn => {
