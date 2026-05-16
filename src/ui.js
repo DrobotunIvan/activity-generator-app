@@ -280,6 +280,13 @@ const renderFavorites = () => {
       <button class="danger btn-remove-fav" data-id="${a.id}">Видалити</button>
     `;
 
+    card.querySelector('.btn-remove-fav').addEventListener('click', (e) => {
+      const id = e.target.getAttribute('data-id');
+      setFavorites(getFavorites().filter(fid => fid !== id));
+      if (currentActivityId === id) updateFavButtonState();
+      renderFavorites();
+    });
+
     // Drag Events
     card.addEventListener('dragstart', (e) => {
       draggedCard = card;
@@ -312,15 +319,6 @@ const renderFavorites = () => {
     e.preventDefault();
     const newOrder = Array.from(list.querySelectorAll('.card')).map(c => c.getAttribute('data-id'));
     setFavorites(newOrder);
-  });
-
-  document.querySelectorAll('.btn-remove-fav').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const id = e.target.getAttribute('data-id');
-      setFavorites(getFavorites().filter(fid => fid !== id));
-      if (currentActivityId === id) updateFavButtonState();
-      renderFavorites();
-    });
   });
 };
 
@@ -368,11 +366,8 @@ const renderCustom = () => {
         <button class="danger btn-remove-custom" data-id="${a.id}">Видалити</button>
       </div>
     `;
-    list.appendChild(card);
-  });
-  
-  document.querySelectorAll('.btn-fav-custom').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+
+    card.querySelector('.btn-fav-custom').addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-id');
       const favs = getFavorites();
       if (favs.includes(id)) {
@@ -383,17 +378,16 @@ const renderCustom = () => {
       renderCustom();
       if (currentActivityId === id) updateFavButtonState();
     });
-  });
-  
-  document.querySelectorAll('.btn-remove-custom').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+
+    card.querySelector('.btn-remove-custom').addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-id');
       setActivities(getActivities().filter(act => act.id !== id));
-      // Remove from favorites and history as well
       setFavorites(getFavorites().filter(fid => fid !== id));
       setHistory(getHistory().filter(h => h.activityId !== id));
       renderCustom();
     });
+
+    list.appendChild(card);
   });
 };
 
@@ -432,11 +426,8 @@ const renderHistory = () => {
         </button>
       </div>
     `;
-    list.appendChild(card);
-  });
-  
-  document.querySelectorAll('.btn-fav-history').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+
+    card.querySelector('.btn-fav-history').addEventListener('click', (e) => {
       const id = e.target.getAttribute('data-id');
       const currentFavs = getFavorites();
       if (currentFavs.includes(id)) {
@@ -447,5 +438,7 @@ const renderHistory = () => {
       renderHistory();
       if (currentActivityId === id) updateFavButtonState();
     });
+
+    list.appendChild(card);
   });
 };
