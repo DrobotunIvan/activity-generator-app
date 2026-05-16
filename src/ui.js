@@ -19,6 +19,7 @@ export const initUI = () => {
   setupCustomForm();
   setupReset();
   setupDataManagement();
+  setupHistoryActions();
   
   // Initial renders
   renderFavorites();
@@ -424,6 +425,7 @@ const renderHistory = () => {
         <button class="${isFav ? 'danger' : 'secondary'} btn-fav-history" data-id="${a.id}">
           ${isFav ? 'Прибрати' : 'В улюблені'}
         </button>
+        <button class="danger btn-remove-history" data-time="${entry.generatedAt}">Видалити</button>
       </div>
     `;
 
@@ -439,6 +441,21 @@ const renderHistory = () => {
       if (currentActivityId === id) updateFavButtonState();
     });
 
+    card.querySelector('.btn-remove-history').addEventListener('click', (e) => {
+      const time = e.target.getAttribute('data-time');
+      setHistory(getHistory().filter(h => h.generatedAt !== time));
+      renderHistory();
+    });
+
     list.appendChild(card);
+  });
+};
+
+const setupHistoryActions = () => {
+  document.getElementById('btn-clear-history').addEventListener('click', () => {
+    if (confirm('Ви впевнені, що хочете повністю очистити історію генерацій?')) {
+      setHistory([]);
+      renderHistory();
+    }
   });
 };
