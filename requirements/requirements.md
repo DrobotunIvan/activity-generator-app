@@ -18,8 +18,10 @@ The system allows users to:
 * generate random activities;
 * filter activities;
 * save favorite activities;
+* reorder favorite activities via interactive drag-and-drop;
 * manage custom activities;
-* view generation history.
+* view generation history and statistics;
+* export and import all custom activities, history, and preferences as a local JSON file.
 
 The system does not include:
 
@@ -44,10 +46,12 @@ The application supports one user role:
 * generate activities;
 * filter activities;
 * save favorites;
-* create custom activities;
+* reorder favorites via drag-and-drop;
+* create custom activities with character validation;
 * delete activities;
 * reset demo data;
-* view statistics and history.
+* view statistics and history;
+* export/import local user data.
 
 ---
 
@@ -61,7 +65,7 @@ Attributes:
 
 * id
 * title
-* description
+* description (formatted in italics)
 * category
 * duration
 * locationType
@@ -69,6 +73,7 @@ Attributes:
 * difficulty
 * rating
 * isFavorite
+* isCustom
 
 ---
 
@@ -107,15 +112,14 @@ The system shall generate a random activity according to selected user preferenc
 ## FR-2 Category Selection
 
 The user shall be able to select one or multiple activity categories.
+The categories are fully localized in Ukrainian:
 
-Example categories:
-
-* Sport
-* Education
-* Creativity
-* Entertainment
-* Outdoor
-* Relaxation
+* Спорт (Sport)
+* Навчання (Education)
+* Креативність (Creativity)
+* Розваги (Entertainment)
+* На вулиці (Outdoor)
+* Відпочинок (Relaxation)
 
 ---
 
@@ -123,7 +127,7 @@ Example categories:
 
 The user shall be able to filter activities by:
 
-* duration;
+* duration (using an interactive range slider);
 * location type;
 * cost type;
 * difficulty level.
@@ -136,7 +140,8 @@ The user shall be able to:
 
 * add activities to favorites;
 * remove activities from favorites;
-* view favorite activities.
+* view favorite activities;
+* reorder favorite activities interactively using drag-and-drop sorting.
 
 ---
 
@@ -158,7 +163,7 @@ The system shall store and display recently generated activities.
 
 ## FR-7 Demo Data Reset
 
-The system shall provide a button to restore default demo activities.
+The system shall provide a button to restore default localized demo activities.
 
 ---
 
@@ -169,6 +174,15 @@ The system shall display simple statistics:
 * number of generated activities;
 * number of favorite activities;
 * most selected category.
+
+---
+
+## FR-9 Data Portability (Export & Import)
+
+The user shall be able to:
+
+* export all favorites, custom activities, and preferences to a local JSON file;
+* import data from a previously exported JSON file to restore their configurations.
 
 ---
 
@@ -195,12 +209,25 @@ The system shall only generate activities from selected categories.
 ## BR-4 Anti-Repetition Rule
 
 The system shall avoid generating the same activity repeatedly within the last 5 generations.
+However, if active filters yield fewer than 5 total matching activities, the anti-repetition rule is relaxed automatically to prevent a "No activities found" error.
 
 ---
 
 ## BR-5 Validation Rule
 
 At least one category must be selected before generating activities.
+
+---
+
+## BR-6 Drag & Drop Persistence Rule
+
+The manually sorted order of favorite activities must persist in LocalStorage and remain identical on page reload.
+
+---
+
+## BR-7 Custom Input Validation Rule
+
+Custom activity inputs (title and description) must adhere to character limits (e.g., maximum length validation) to prevent UI breaking and layout overlap.
 
 ---
 
@@ -232,7 +259,37 @@ User data shall persist using browser LocalStorage.
 
 ## NFR-5 Responsiveness
 
-The user interface shall adapt to mobile and desktop screen sizes.
+The user interface shall adapt to mobile and desktop screen sizes (fully responsive grid and flex layouts).
+
+---
+
+## NFR-6 Dark Glassmorphism Styling
+
+The application shall feature a dark glassmorphism theme:
+* Semi-transparent dark panels (`rgba(30, 30, 35, 0.5)` background with `backdrop-filter: blur(10px)`);
+* Dynamic dice background image filling the viewport.
+
+---
+
+## NFR-7 Premium Typography
+
+The application shall utilize premium typography from Google Fonts:
+* **Outfit** font for general body text and navigation elements;
+* **Playfair Display** (bold & italic) for the main title logo and primary buttons.
+
+---
+
+## NFR-8 Micro-Animations & Dynamic Hover Effects
+
+The application shall feature engaging UI micro-animations:
+* **Spotlight effect**: A dynamic cursor tracker on cards that increases card contrast by 50% under the mouse cursor.
+* **Bouncing Category Icons**: Theme emojis (🏃, 📚, 🎨, 🎮, 🏕️, 🧘) must perform a jump-and-tilt micro-animation when hovered.
+
+---
+
+## NFR-9 Language Support
+
+The user interface, controls, and default list of 34+ activities must be fully localized in Ukrainian.
 
 ---
 
@@ -274,6 +331,24 @@ then the activity is added to the system.
 
 When the user clicks “Reset Demo Data”,
 then default activities are restored.
+
+---
+
+## AC-6 Drag-and-Drop Reordering
+
+Given a list of favorite activities,
+when the user drags a card and drops it in a new position,
+then the list reorders accordingly and the new order is saved to LocalStorage.
+
+---
+
+## AC-7 Data Portability
+
+Given local custom activities and favorites,
+when the user exports their data,
+then a JSON file is downloaded.
+When the user imports a valid JSON file,
+then their configurations are successfully merged/restored.
 
 ---
 
